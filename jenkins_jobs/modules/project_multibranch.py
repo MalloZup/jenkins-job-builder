@@ -593,6 +593,13 @@ def github_scm(xml_parent, data):
     helpers.convert_mapping_to_xml(
         dpro, data, dpro_mapping, fail_required=True)
 
+    # WildcardSCMHeadFilterTrait
+    filter_head_includes = data.get('filter-head-includes', False)
+    if filter_head_includes:
+        f = XML.SubElement(traits, 'jenkins.scm.impl.trait.WildcardSCMHeadFilterTrait')
+        XML.SubElement(f, 'includes').text = filter_head_includes
+        XML.SubElement(f, 'excludes').text = ''
+
     # NotificationContextTrait / github-scm-trait-notification-context
     notification_context = data.get('notification-context', False)
     if notification_context:
