@@ -592,3 +592,10 @@ def github_scm(xml_parent, data):
     ]
     helpers.convert_mapping_to_xml(
         dpro, data, dpro_mapping, fail_required=True)
+
+    # NotificationContextTrait / github-scm-trait-notification-context
+    notification_context = data.get('notification-context', False)
+    if notification_context:
+        t = XML.SubElement(traits, 'org.jenkinsci.plugins.githubScmTraitNotificationContext.NotificationContextTrait')
+        XML.SubElement(t, 'contextLabel').text = notification_context
+        XML.SubElement(t, 'typeSuffix').text = 'true'
