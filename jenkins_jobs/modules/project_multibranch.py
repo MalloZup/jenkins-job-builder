@@ -32,6 +32,9 @@ Plugins required:
 
 :Job Parameters:
 
+    * **scriptPath** (`str`): The path to the Jenkinsfile within the
+      repository (default 'Jenkinsfile')
+
     * **scm** (`list`): The SCM definition.
 
         * **bitbucket** (`dict`): Refer to
@@ -270,7 +273,7 @@ class WorkflowMultiBranch(jenkins_jobs.modules.base.Base):
             'class': self.jenkins_class,
             'reference': '../..'
         })
-        XML.SubElement(factory, 'scriptPath').text = 'Jenkinsfile'
+        XML.SubElement(factory, 'scriptPath').text = data.get('scriptPath', 'Jenkinsfile')
 
         return xml_parent
 
