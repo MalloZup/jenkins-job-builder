@@ -609,3 +609,15 @@ def github_scm(xml_parent, data):
         t = XML.SubElement(traits, 'org.jenkinsci.plugins.githubScmTraitNotificationContext.NotificationContextTrait')
         XML.SubElement(t, 'contextLabel').text = notification_context
         XML.SubElement(t, 'typeSuffix').text = 'true'
+
+    strategies = XML.SubElement(source, 'strategy')
+    strategies.attrib['class'] = "jenkins.branch.DefaultBranchPropertyStrategy"
+
+    properties = XML.SubElement(strategies, 'properties')
+    properties.attrib['class'] = "java.util.Arrays$ArrayList"
+
+    bpas = XML.SubElement(properties, 'a')
+    bpas.attrib['class'] = "jenkins.branch.BranchProperty-array"
+
+    if data.get('suppress-automatic-scm-triggering', False):
+        ntbp = XML.SubElement(bpas, 'jenkins.branch.NoTriggerBranchProperty')
