@@ -610,7 +610,7 @@ def github_scm(xml_parent, data):
         XML.SubElement(t, 'contextLabel').text = notification_context
         XML.SubElement(t, 'typeSuffix').text = 'true'
 
-    strategies = XML.SubElement(source, 'strategy')
+    strategies = XML.SubElement(xml_parent, 'strategy')
     strategies.attrib['class'] = "jenkins.branch.DefaultBranchPropertyStrategy"
 
     properties = XML.SubElement(strategies, 'properties')
