@@ -600,6 +600,12 @@ def github_scm(xml_parent, data):
         XML.SubElement(f, 'includes').text = filter_head_includes
         XML.SubElement(f, 'excludes').text = ''
 
+    # RegexSCMHeadFilterTrait
+    filter_head_regex = data.get('filter-head-regex', False)
+    if filter_head_regex:
+        f = XML.SubElement(traits, 'jenkins.scm.impl.trait.RegexSCMHeadFilterTrait')
+        XML.SubElement(f, 'regex').text = filter_head_regex
+
     # NotificationContextTrait / github-scm-trait-notification-context
     notification_context = data.get('notification-context', False)
     if notification_context:
